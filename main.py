@@ -1,15 +1,23 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import undetected_chromedriver as uc
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 # Webdriver-Optionen festlegen
 options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-gpu')
+options.add_argument('--remote-debugging-port=9222')
+options.add_argument('--window-size=1920x1080')
 
-# Undetected ChromeDriver verwenden
-driver = uc.Chrome(options=options)
+# Verwende WebDriverManager zum Installieren von ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
 
 try:
     # Öffne die Webseite
