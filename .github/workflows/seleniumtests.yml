@@ -1,11 +1,6 @@
 name: Selenium Tests
 
-on:
-  schedule:
-    # Runs every 30 minutes
-    # new fork
-    - cron: '*/30 * * * *'
-  workflow_dispatch:
+on: [push]
 
 jobs:
   test:
